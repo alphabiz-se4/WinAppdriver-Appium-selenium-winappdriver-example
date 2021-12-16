@@ -36,9 +36,9 @@ jobs:
       - name: Install Calculator*
         run:  |
           Get-AppxPackage -allusers *windowscalculator*
-          Add-AppxPackage -register "C:\Program Files\WindowsApps\Microsoft.WindowsCalculator_10.1903.21.0_x64__8wekyb3d8bbwe\appxmanifest.xml" -DisableDevelopmentMode
+# Add-AppxPackage -register "C:\Program Files\WindowsApps\Microsoft.WindowsCalculator_10.1903.21.0_x64__8wekyb3d8bbwe\appxmanifest.xml" -DisableDevelopmentMode
         shell: powershell
-        
+
       - name: Install winappdriver.msi
         run: | 
           Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
