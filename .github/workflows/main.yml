@@ -34,7 +34,10 @@ jobs:
         run: yarn install
 
       - name: check all app
-        run: Get-AppxPackage -AllUsers | Select Name, PackageFullName
+        run: |
+          Import-Module Appx
+          Get-AppxPackage -AllUsers | Select Name, PackageFullName
+        shell: powershell
 
       - name: Install Calculator*
         run:  |
