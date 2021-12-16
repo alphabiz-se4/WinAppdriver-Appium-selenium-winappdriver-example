@@ -33,15 +33,12 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
 
-      - name: check all app
-        run: |
-          Import-Module Appx
-          Get-AppxPackage -AllUsers | Select Name, PackageFullName
-        shell: powershell
-
       - name: Install Calculator*
         run:  |
-          Get-AppxPackage -allusers *windowscalculator*
+          dir
+          Import-Module Appx
+          Add-AppPackage -Path .\Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle
+# msiexec /i  "./Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle" /q
 # Add-AppxPackage -register "C:\Program Files\WindowsApps\Microsoft.WindowsCalculator_10.1903.21.0_x64__8wekyb3d8bbwe\appxmanifest.xml" -DisableDevelopmentMode
         shell: powershell
 
