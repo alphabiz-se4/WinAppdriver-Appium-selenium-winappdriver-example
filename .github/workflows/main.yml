@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: winappdriver
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  
+
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [win10-self-hosted]
+        os: [windows-latest]
+        node-version: [14]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install
+
+      - name: Install winappdriver.msi
+        run: | 
+          Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
+          msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
+          Start-Sleep -s 5
+          
+      - name: Run appium
+        run: |
+          Start-Process PowerShell -ArgumentList "npx winappdriver"
+          Start-Sleep -s 10
+          
+      - name: Run test release
+        run: yarn run jest
+      
