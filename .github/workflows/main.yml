@@ -8,8 +8,6 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-  
-
 
 jobs:
   build:
@@ -21,6 +19,19 @@ jobs:
         os: [windows-latest]
         node-version: [14]
     steps:
+      - name: Get short SHA 🔑
+        id: slug
+        run: |
+          echo "::set-output name=sha7::${GITHUB_SHA::7}"
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️
+        uses: actions/checkout@v2
+
+      - name: Checkout ${{ steps.slug.outputs.date }} ⬇️
+        uses: actions/checkout@v2
+
       - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -29,6 +40,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
           registry-url: 'https://npm.pkg.github.com'
+
+      - name: Get short SHA 🔑
+        id: vars
+        run: |
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout ${{ steps.vars.outputs.date }} ⬇️
+        uses: actions/checkout@v2
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
@@ -39,6 +59,7 @@ jobs:
           Import-Module Appx
           Get-AppxPackage -AllUsers | Select Name, PackageFullName
           Get-AppxPackage -Allusers *windowscalculator*
+          Get-WindowsDeveloperLicense
           Add-AppPackage -Path .\Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle
         shell: powershell
 
