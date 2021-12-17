@@ -80,3 +80,9 @@ jobs:
       - name: Run test release
         run: yarn run jest
       
+      - name: Upload Test Results 🗃
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: "output"
+          path: output/**
