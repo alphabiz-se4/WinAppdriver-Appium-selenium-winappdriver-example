@@ -74,7 +74,7 @@ jobs:
 
       - name: Run appium
         run: |
-          Start-Process PowerShell -ArgumentList "yarn test:appium"
+          Start-Process PowerShell -ArgumentList "yarn appium"
           Start-Sleep -s 10
           
       - name: Run test release
