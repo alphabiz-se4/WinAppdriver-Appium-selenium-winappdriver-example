@@ -1,6 +1,7 @@
 import { driver, windowsAppDriverCapabilities } from 'selenium-appium'
+const path = require('path')
 
-const appId = 'GifCam.exe'
+const appId = path.resolve(__dirname, './GifCam.exe')
 
 class TestEnvironment {
   setup() {

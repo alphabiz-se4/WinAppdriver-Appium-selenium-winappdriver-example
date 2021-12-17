@@ -14,7 +14,7 @@ describe('Use PageObject', () => {
         // CalculatorPage.clear();
     })
     test('click', async () => {
-        await By2.xpath('//SplitButton[@ClassName="TButton" and @Name="Rec"]').click()
+        await By2.xpath('//SplitButton[@Name="Rec"]').click()
         // const Frame = By2.nativeXpath('//*[@Name="Frame"]')
         // await Frame.click()
         // await By2.xpath('//*[@Name="Rec"]').click()
