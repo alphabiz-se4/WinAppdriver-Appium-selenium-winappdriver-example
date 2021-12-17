@@ -47,7 +47,8 @@ jobs:
         shell: bash
 
       - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
-
+        run: |
+          echo "${{ steps.vars.outputs.date }}"
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
