@@ -14,9 +14,11 @@ describe('Use PageObject', () => {
         // CalculatorPage.clear();
     })
     test('click', async () => {
-        // await By2.nativeXpath('//*[@Name="Frame"]').click()
-        await By2.nativeXpath('//*[@Name="Rec"]').click()
-        await By2.nativeXpath('//*[@Name="Stop"]').click()
+        await By2.xpath('//SplitButton[@ClassName="TButton" and @Name="Rec"]').click()
+        // const Frame = By2.nativeXpath('//*[@Name="Frame"]')
+        // await Frame.click()
+        // await By2.xpath('//*[@Name="Rec"]').click()
+        await By2.xpath('//*[@Name="Stop"]').click()
     })
     test.skip('Plus', async () => {
         await CalculatorPage.waitForPageLoaded();
