@@ -14,11 +14,11 @@ describe('Use PageObject', () => {
         // CalculatorPage.clear();
     })
     test('click', async () => {
-        await By2.xpath('//SplitButton[@Name="Rec"]').click()
+        await By2.nativeXpath('//*[@Name="Frame"]').click()
         // const Frame = By2.nativeXpath('//*[@Name="Frame"]')
         // await Frame.click()
         // await By2.xpath('//*[@Name="Rec"]').click()
-        await By2.xpath('//*[@Name="Stop"]').click()
+        await By2.nativeXpath('//*[@Name="Edit"]').click()
     })
     test.skip('Plus', async () => {
         await CalculatorPage.waitForPageLoaded();
