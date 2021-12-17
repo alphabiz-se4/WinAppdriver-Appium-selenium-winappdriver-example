@@ -9,7 +9,7 @@ afterAll(() => {
     return TestEnvironment.teardown();
 })
 
-describe('Use PageObject', () => {
+describe.skip('Use PageObject', () => {
     beforeEach(() => {
         // CalculatorPage.clear();
     })

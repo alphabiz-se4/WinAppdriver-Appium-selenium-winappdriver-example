@@ -65,17 +65,17 @@ jobs:
           msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
           Start-Sleep -s 5
 
-      - name: manu Run winappdriver
-        run: | 
-          cd "C:\Program Files (x86)\Windows Application Driver\"
-          Start-Process -FilePath "C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe"
-          Start-Sleep -s 5
-        shell: powershell
+      # - name: manu Run winappdriver
+      #   run: | 
+      #     cd "C:\Program Files (x86)\Windows Application Driver\"
+      #     Start-Process -FilePath "C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe"
+      #     Start-Sleep -s 5
+      #   shell: powershell
 
-      # - name: Run appium
-      #   run: |
-      #     Start-Process PowerShell -ArgumentList "npx winappdriver"
-      #     Start-Sleep -s 10
+      - name: Run appium
+        run: |
+          Start-Process PowerShell -ArgumentList "yarn test:appium"
+          Start-Sleep -s 10
           
       - name: Run test release
         run: yarn run jest
