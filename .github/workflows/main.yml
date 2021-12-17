@@ -27,12 +27,11 @@ jobs:
         shell: bash
 
       - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️
-        uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
 
       - name: Checkout ${{ steps.slug.outputs.date }} ⬇️
-        uses: actions/checkout@v2
 
-      - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -41,27 +40,27 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://npm.pkg.github.com'
 
-      - name: Get short SHA 🔑
+      - name: Get last commit date
         id: vars
         run: |
           echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
         shell: bash
 
-      - name: Checkout ${{ steps.vars.outputs.date }} ⬇️
-        uses: actions/checkout@v2
+      - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
+
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
 
-      - name: Install Calculator*
-        run:  |
-          dir
-          Import-Module Appx
-          Get-AppxPackage -AllUsers | Select Name, PackageFullName
-          Get-AppxPackage -Allusers *windowscalculator*
-          Get-WindowsDeveloperLicense
-          Add-AppPackage -Path .\Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle
-        shell: powershell
+      # - name: Install Calculator*
+      #   run:  |
+      #     dir
+      #     Import-Module Appx
+      #     Get-AppxPackage -AllUsers | Select Name, PackageFullName
+      #     Get-AppxPackage -Allusers *windowscalculator*
+      #     Get-WindowsDeveloperLicense
+      #     Add-AppPackage -Path .\Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle
+      #   shell: powershell
 
       - name: Install winappdriver.msi
         run: | 

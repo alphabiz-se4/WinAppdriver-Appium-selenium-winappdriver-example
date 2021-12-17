@@ -1,8 +1,8 @@
 import { driver, windowsAppDriverCapabilities } from 'selenium-appium'
 
-const appId = 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App'
+const appId = 'GifCam.exe'
 
-class TestEnvironment { 
+class TestEnvironment {
   setup() {
     jest.setTimeout(60000);
     const capabilities = windowsAppDriverCapabilities(appId);

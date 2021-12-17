@@ -16,7 +16,7 @@ afterAll(() => {
 })
 
 describe('Calculator Test', () => {
-    test('Plus', async () => {
+    test.skip('Plus', async () => {
         await oneButton.click();
         await plusButton.click();
         await sevenButton.click();
