@@ -1,8 +1,8 @@
 import TestEnvironment from "../TestEnvironment";
 import CalculatorPage from '../Pages/CalculatorPage'
 import { PageObject, By2 } from "selenium-appium"
-beforeAll(() => {
-    return TestEnvironment.setup();;
+beforeAll(async () => {
+    return await TestEnvironment.setup();;
 })
 
 afterAll(() => {
@@ -14,8 +14,9 @@ describe('Use PageObject', () => {
         // CalculatorPage.clear();
     })
     test('click', async () => {
-        await By2.nativeName('Rec').click()
-        await By2.nativeName('Stop').click()
+        // await By2.nativeXpath('//*[@Name="Frame"]').click()
+        await By2.nativeXpath('//*[@Name="Rec"]').click()
+        await By2.nativeXpath('//*[@Name="Stop"]').click()
     })
     test.skip('Plus', async () => {
         await CalculatorPage.waitForPageLoaded();
