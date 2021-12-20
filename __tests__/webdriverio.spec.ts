@@ -3,6 +3,8 @@ import CalculatorPage from '../Pages/CalculatorPage'
 import { PageObject, By2 } from "selenium-appium"
 const path = require('path')
 const wdio = require('webdriverio')
+const fs = require('fs')
+
 const GifCamID = path.resolve(__dirname, '../GifCam.exe')
 
 const opts = {
@@ -39,6 +41,11 @@ describe('Use PageObject', () => {
     })
 
     it('client screenshot', async () => {
+        // 判断该路径是否存在，若不存在，则创建
+        var dir = './test/output/'
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true })
+        }
         client.saveScreenshot('output/screenshot.png')
 
     })
