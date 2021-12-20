@@ -63,9 +63,9 @@ jobs:
         run: | 
           Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
           Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
-      # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
           Start-Sleep -s 5
-
+        shell: powershell
+      # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
       # - name: manu Run winappdriver
       #   run: | 
       #     cd "C:\Program Files (x86)\Windows Application Driver\"
