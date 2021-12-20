@@ -42,7 +42,7 @@ describe('Use PageObject', () => {
 
     it('client screenshot', async () => {
         // 判断该路径是否存在，若不存在，则创建
-        var dir = './test/output/'
+        var dir = './output/'
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true })
         }
