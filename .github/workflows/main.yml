@@ -62,7 +62,8 @@ jobs:
       - name: Install winappdriver.msi
         run: | 
           Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
-          msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
+          Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
+      # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
           Start-Sleep -s 5
 
       # - name: manu Run winappdriver
