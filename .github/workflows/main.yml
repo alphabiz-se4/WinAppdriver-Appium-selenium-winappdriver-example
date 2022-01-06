@@ -74,11 +74,14 @@ jobs:
       #     Start-Sleep -s 5
       #   shell: powershell
 
-      - name: Run appium
-        run: |
-          Start-Process PowerShell -ArgumentList "yarn appium"
-          Start-Sleep -s 10
-          
+      # - name: Run appium
+      #   run: |
+      #     Start-Process PowerShell -ArgumentList "yarn appium"
+      #     Start-Sleep -s 10
+
+      - name: Appium Server Action
+        uses: moatazeldebsy/Appium-Server-GitHub-Action@V1.0.5
+
       - name: Run test release
         run: yarn run jest
       
