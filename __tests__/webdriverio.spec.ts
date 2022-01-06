@@ -5,8 +5,8 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = path.resolve(__dirname, '../test.txt')
-
+const GifCamID = path.resolve(__dirname, '../WinAppDriverUIRecorder/WinAppDriverUiRecorder.exe')
+// path.resolve(__dirname, '../GifCam.exe')
 const opts = {
     path: '/wd/hub',
     port: 4723,
@@ -52,7 +52,17 @@ describe('Use PageObject', () => {
         client.saveScreenshot('output/screenshot.png')
 
     })
-    it('GifCam', async () => {
+    it.skip('GifCam', async () => {
+        // await client.$('//*[@Name="GifCam"]').click()
+        await sleep(2000)
+        await client.$('//*[@Name="Rec"]').click()
+
+    })
+    it('WinAppDriverUi', async () => {
+        await client.$('//*[@Name="Record"]').click()
+        await client.$('//*[@Name="Clear"]').click()
+    })
+    it.skip('txt', async () => {
         await client.$('//*[@Name="Text Editor"]').addValue('aabbcc')
         await sleep(2000)
         await client.$('//*[@Name="Edit"]').click()
