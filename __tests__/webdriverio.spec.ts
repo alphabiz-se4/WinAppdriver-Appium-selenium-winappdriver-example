@@ -60,6 +60,7 @@ describe('Use PageObject', () => {
     })
     it('WinAppDriverUi', async () => {
         await client.$('//*[@Name="Record"]').click()
+        await client.$('//*[@Name="C# Code"]').click()
         await client.$('//*[@Name="Clear"]').click()
     })
     it.skip('txt', async () => {
