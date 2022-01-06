@@ -5,7 +5,7 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = path.resolve(__dirname, '../GifCam.exe')
+const GifCamID = path.resolve(__dirname, '../test.txt')
 
 const opts = {
     path: '/wd/hub',
@@ -27,7 +27,9 @@ const opts = {
     // }
 }
 let client
-
+function sleep (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
 describe('Use PageObject', () => {
     it('build', async () => {
         client = await wdio.remote(opts)
@@ -50,8 +52,9 @@ describe('Use PageObject', () => {
 
     })
     it('GifCam', async () => {
-        await client.$('//*[@Name="Frame"]').click()
         await client.$('//*[@Name="Edit"]').click()
+        await client.$('//Button[@Name="Line down"]').click()
+        await sleep(2000)
 
     })
     it('close session', async () => {
