@@ -30,6 +30,7 @@ let client
 function sleep (ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
+jest.setTimeout(60000 * 15)
 describe('Use PageObject', () => {
     it('build', async () => {
         client = await wdio.remote(opts)
@@ -52,9 +53,13 @@ describe('Use PageObject', () => {
 
     })
     it('GifCam', async () => {
+        await client.$('//*[@Name="Text Editor"]').addValue('aabbcc')
+        await sleep(2000)
         await client.$('//*[@Name="Edit"]').click()
         await client.$('//Button[@Name="Line down"]').click()
         await sleep(2000)
+        await client.$('//Button[@Name="Close"]').click()
+        await client.$('//Button[@Name="Save"]').click()
 
     })
     it('close session', async () => {
