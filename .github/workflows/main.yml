@@ -66,6 +66,12 @@ jobs:
           Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
           Start-Sleep -s 5
         shell: powershell
+
+      - name: Install AccessibilityInsights/msi
+        run: |
+          Invoke-WebRequest "https://github.com/microsoft/accessibility-insights-windows/releases/download/v1.1.1815.01/AccessibilityInsights.msi" -OutFIle "C:\AccessibilityInsights.msi"
+          Start-Process msiexec -ArgumentList "/quiet","/i","C:\AccessibilityInsights.msi" -Verb runAs -Wait
+          Start-Sleep -s 5
       # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
       # - name: manu Run winappdriver
       #   run: | 

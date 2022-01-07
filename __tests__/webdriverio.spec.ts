@@ -5,7 +5,11 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = path.resolve(__dirname, '../WinAppDriverUIRecorder/WinAppDriverUiRecorder.exe')
+const GifCamID = 'C:/Program Files (x86)/AccessibilityInsights/1.1/AccessibilityInsights.exe'
+// 'C:/Users/alphabiz/Downloads/crystaldiskinfo8_12_7/DiskInfo64.exe'
+// path.resolve(__dirname, '../XYplorerPortable/XYplorerPortable.exe')
+// path.resolve(__dirname, '../HD Tune Pro5.75/HD Tune Pro5.75.exe')
+// path.resolve(__dirname, '../WinAppDriverUIRecorder/WinAppDriverUiRecorder.exe')
 // path.resolve(__dirname, '../GifCam.exe')
 const opts = {
     path: '/wd/hub',
@@ -54,11 +58,15 @@ describe('Use PageObject', () => {
     })
     it.skip('GifCam', async () => {
         // await client.$('//*[@Name="GifCam"]').click()
+        await client.$('//Pane[@ClassName="TPanel"]').click()
+        await client.$('//*[@Name="Frame"]').click()
         await sleep(2000)
-        await client.$('//*[@Name="Rec"]').click()
-
     })
-    it('WinAppDriverUi', async () => {
+    it.skip('XYplorer', async () => {
+        await client.$('//*[@Name="Edit"]').click()
+        await sleep(2000)
+    })
+    it.skip('WinAppDriverUi', async () => {
         await client.$('//*[@Name="Record"]').click()
         await client.$('//*[@Name="C# Code"]').click()
         await client.$('//*[@Name="Clear"]').click()
@@ -71,7 +79,17 @@ describe('Use PageObject', () => {
         await sleep(2000)
         await client.$('//Button[@Name="Close"]').click()
         await client.$('//Button[@Name="Save"]').click()
-
+    })
+    it.skip('HD Tune Pro5.75', async () => {
+        await client.$('//*[@Name="\u9000\u51fa"]').click()
+        await sleep(2000)
+    })
+    it('AccessibilityInsights', async () => {
+        await client.$('//*[@Name="Get Started"]').click()
+        await client.$('//Image[@ClassName="FabricIconControl"][@Name="Photo"]').click()
+        await client.$('//Image[@ClassName="FabricIconControl"][@Name="Pause"]').click()
+        await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
+        await sleep(2000)
     })
     it('close session', async () => {
         await client.deleteSession()
