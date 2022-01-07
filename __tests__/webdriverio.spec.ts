@@ -85,7 +85,9 @@ describe('Use PageObject', () => {
         await sleep(2000)
     })
     it('AccessibilityInsights', async () => {
+        client.saveScreenshot('output/screenshot1.png')
         await client.$('//*[@Name="Get Started"]').click()
+        client.saveScreenshot('output/screenshot2.png')
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Photo"]').click()
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Pause"]').click()
         await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
