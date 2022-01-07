@@ -77,7 +77,9 @@ jobs:
           Invoke-WebRequest "https://github.com/tanshuai/alphabiz-app/releases/download/nightly-20220106-63a10f1/alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z" -OutFIle "C:\alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z"
           cd C:/
           7z x alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z
-
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+          GITHUB_PAT: ${{ secrets.PAT }}
       # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
       # - name: manu Run winappdriver
       #   run: | 
