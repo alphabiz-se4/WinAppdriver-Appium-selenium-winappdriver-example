@@ -72,6 +72,12 @@ jobs:
           Invoke-WebRequest "https://github.com/microsoft/accessibility-insights-windows/releases/download/v1.1.1815.01/AccessibilityInsights.msi" -OutFIle "C:\AccessibilityInsights.msi"
           Start-Process msiexec -ArgumentList "/quiet","/i","C:\AccessibilityInsights.msi" -Verb runAs -Wait
           Start-Sleep -s 5
+      - name: Install Alphabiz.7z
+        run: |
+          Invoke-WebRequest "https://github.com/tanshuai/alphabiz-app/releases/download/nightly-20220106-63a10f1/alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z" -OutFIle "C:\alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z"
+          cd C:/
+          7z x alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z
+
       # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
       # - name: manu Run winappdriver
       #   run: | 

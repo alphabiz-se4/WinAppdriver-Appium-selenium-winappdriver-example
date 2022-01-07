@@ -6,7 +6,8 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = 'C:/Program Files (x86)/AccessibilityInsights/1.1/AccessibilityInsights.exe'
+const GifCamID = 'C:/electron/Alphabiz-win32-x64/Alphabiz.exe'
+// 'C:/Program Files (x86)/AccessibilityInsights/1.1/AccessibilityInsights.exe'
 // 'C:/Users/alphabiz/Downloads/crystaldiskinfo8_12_7/DiskInfo64.exe'
 // path.resolve(__dirname, '../XYplorerPortable/XYplorerPortable.exe')
 // path.resolve(__dirname, '../HD Tune Pro5.75/HD Tune Pro5.75.exe')
@@ -85,7 +86,7 @@ describe('Use PageObject', () => {
         await client.$('//*[@Name="\u9000\u51fa"]').click()
         await sleep(2000)
     })
-    it('AccessibilityInsights', async () => {
+    it.skip('AccessibilityInsights', async () => {
         client.saveScreenshot('output/screenshot1.png')
         if (await client.$('//*[@Name="We need your help"]').isDisplayed()) {
             await client.$('//*[@Name="OK"]').click()
@@ -98,8 +99,12 @@ describe('Use PageObject', () => {
         await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
         await sleep(2000)
     })
-    it.skip('Alphabiz', async () => {
-
+    it('Alphabiz', async () => {
+        client.saveScreenshot('output/screenshot1.png')
+        await client.$('//*[@Name="Alphabiz"]').click()
+        await client.$('//*[@Name="DOWNLOAD"]').click()
+        client.saveScreenshot('output/screenshot1.png')
+        await sleep(2000)
     })
     it('close session', async () => {
         await client.deleteSession()
