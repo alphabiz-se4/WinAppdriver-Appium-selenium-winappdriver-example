@@ -1,6 +1,7 @@
 import TestEnvironment from "../TestEnvironment";
 import CalculatorPage from '../Pages/CalculatorPage'
 import { PageObject, By2 } from "selenium-appium"
+import { iterator } from "core-js/fn/symbol";
 const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
@@ -86,12 +87,19 @@ describe('Use PageObject', () => {
     })
     it('AccessibilityInsights', async () => {
         client.saveScreenshot('output/screenshot1.png')
+        if (await client.$('//*[@Name="We need your help"]').isDisplayed()) {
+            await client.$('//*[@Name="OK"]').click()
+        }
         await client.$('//*[@Name="Get Started"]').click()
+        await sleep(3000)
         client.saveScreenshot('output/screenshot2.png')
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Photo"]').click()
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Pause"]').click()
         await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
         await sleep(2000)
+    })
+    it.skip('Alphabiz', async () => {
+
     })
     it('close session', async () => {
         await client.deleteSession()
