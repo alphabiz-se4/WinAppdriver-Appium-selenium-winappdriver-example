@@ -107,6 +107,7 @@ describe('Use PageObject', () => {
         await client.$('//*[@Name="Alphabiz"]').click()
         await client.$('//Button[@Name="Maximize"]').click()
         await client.saveScreenshot('output/screenshot2.png')
+        await client.$('//Text[@Name="Alphabiz"]').click()
         await client.$('//*[@Name="DOWNLOAD"]').click()
         await client.saveScreenshot('output/screenshot3.png')
         await sleep(2000)
