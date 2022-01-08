@@ -6,7 +6,7 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = path.resolve(__dirname, '../GifCam.exe')
+const GifCamID = 'C:/electron/Alphabiz-win32-x64/Alphabiz.exe'
 // 'C:/electron/Alphabiz-win32-x64/Alphabiz.exe'
 // 'C:/Program Files (x86)/AccessibilityInsights/1.1/AccessibilityInsights.exe'
 // 'C:/Users/alphabiz/Downloads/crystaldiskinfo8_12_7/DiskInfo64.exe'
@@ -59,7 +59,7 @@ describe('Use PageObject', () => {
         client.saveScreenshot('output/screenshot.png')
 
     })
-    it('GifCam', async () => {
+    it.skip('GifCam', async () => {
         await client.$("//SplitButton[@ClassName=\"TButton\"][@Name=\"Rec\"]").click()
         await client.$('//*[@Name="Save"]').click()
         await sleep(2000)
@@ -99,7 +99,7 @@ describe('Use PageObject', () => {
         await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
         await sleep(2000)
     })
-    it.skip('Alphabiz', async () => {
+    it('Alphabiz', async () => {
         if (await client.$('//*[@Name="Windows Security Alert"]').isDisplayed()) {
             await client.$('//*[@Name="Allow access"]').click()
           }

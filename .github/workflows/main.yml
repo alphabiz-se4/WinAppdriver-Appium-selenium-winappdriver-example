@@ -51,9 +51,9 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
 
-      - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1
-        with:
-          sdk-version: 22000
+      # - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1
+      #   with:
+      #     sdk-version: 22000
 
       # - name: Install Calculator*
       #   run:  |
@@ -73,20 +73,20 @@ jobs:
           Start-Sleep -s 5
         shell: powershell
 
-      - name: Install AccessibilityInsights/msi
-        run: |
-          Invoke-WebRequest "https://github.com/microsoft/accessibility-insights-windows/releases/download/v1.1.1815.01/AccessibilityInsights.msi" -OutFIle "C:\AccessibilityInsights.msi"
-          Start-Process msiexec -ArgumentList "/quiet","/i","C:\AccessibilityInsights.msi" -Verb runAs -Wait
-          Start-Sleep -s 5
-
-      # - name: Install Alphabiz.7z
+      # - name: Install AccessibilityInsights/msi
       #   run: |
-      #     Invoke-WebRequest "https://github.com/tanshuai/alphabiz-app/releases/download/nightly-20220106-63a10f1/alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z" -OutFIle "C:\alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z"
-      #     cd C:/
-      #     7z x alphabiz-win-self-hosted-1-nightly-20220106-63a10f1.7z
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.PAT }}
-      #     GITHUB_PAT: ${{ secrets.PAT }}
+      #     Invoke-WebRequest "https://github.com/microsoft/accessibility-insights-windows/releases/download/v1.1.1815.01/AccessibilityInsights.msi" -OutFIle "C:\AccessibilityInsights.msi"
+      #     Start-Process msiexec -ArgumentList "/quiet","/i","C:\AccessibilityInsights.msi" -Verb runAs -Wait
+      #     Start-Sleep -s 5
+
+      - name: Install Alphabiz.7z
+        run: |
+          Invoke-WebRequest "https://github.com/alphabiz-se4/WinAppdriver-Appium-selenium-winappdriver-example/releases/download/alphabiz-v1.0/alphabiz.7z" -OutFIle "C:\alphabiz.7z"
+          cd C:/
+          7z x alphabiz.7z
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+          GITHUB_PAT: ${{ secrets.PAT }}
       # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
 
       # - name: manu Run winappdriver
