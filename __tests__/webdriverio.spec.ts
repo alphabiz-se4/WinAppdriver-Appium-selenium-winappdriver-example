@@ -96,17 +96,20 @@ describe('Use PageObject', () => {
         client.saveScreenshot('output/screenshot2.png')
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Photo"]').click()
         await client.$('//Image[@ClassName="FabricIconControl"][@Name="Pause"]').click()
-        await client.$('//Button[@Name="Settings 1 of 2"][@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
+        await client.$('//Button[@AutomationId="MainWinSettingsButton"]/Text[@ClassName="TextBlock"][@Name="_c"]').click()
         await sleep(2000)
     })
     it('Alphabiz', async () => {
+        await sleep(5000)
         if (await client.$('//*[@Name="Windows Security Alert"]').isDisplayed()) {
             await client.$('//*[@Name="Allow access"]').click()
           }
-        client.saveScreenshot('output/screenshot1.png')
+        await client.saveScreenshot('output/screenshot1.png')
         await client.$('//*[@Name="Alphabiz"]').click()
+        await client.$('//Button[@Name="Maximize"]').click()
+        await client.saveScreenshot('output/screenshot2.png')
         await client.$('//*[@Name="DOWNLOAD"]').click()
-        client.saveScreenshot('output/screenshot1.png')
+        await client.saveScreenshot('output/screenshot3.png')
         await sleep(2000)
     })
     it('close session', async () => {
