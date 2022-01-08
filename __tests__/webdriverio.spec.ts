@@ -1,6 +1,5 @@
 import TestEnvironment from "../TestEnvironment";
 import CalculatorPage from '../Pages/CalculatorPage'
-import { PageObject, By2 } from "selenium-appium"
 import { iterator } from "core-js/fn/symbol";
 const path = require('path')
 const wdio = require('webdriverio')
