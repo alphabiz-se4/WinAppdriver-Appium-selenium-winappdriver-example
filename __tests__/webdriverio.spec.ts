@@ -60,8 +60,7 @@ describe('Use PageObject', () => {
 
     })
     it('GifCam', async () => {
-        // await client.$('//*[@Name="GifCam"]').click()
-        // await client.$('//Pane[@ClassName="TPanel"]').click()
+        await client.$("//SplitButton[@ClassName=\"TButton\"][@Name=\"Rec\"]").click()
         await client.$('//*[@Name="Save"]').click()
         await sleep(2000)
     })
