@@ -102,7 +102,7 @@ jobs:
           Start-Sleep -s 10
           
       - name: Run test release
-        run: yarn run jest
+        # run: yarn run jest
         uses: nick-invision/retry@v2
         with:
           timeout_seconds: 30
