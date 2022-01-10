@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         # os: [win10-self-hosted]
-        os: [windows-latest]
+        os: [windows-latest, windows-latest]
         node-version: [14]
     steps:
       - name: Get short SHA 🔑
@@ -57,6 +57,7 @@ jobs:
         shell: powershell
   
   test:
+    needs: build
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
