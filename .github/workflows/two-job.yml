@@ -5,10 +5,8 @@ env:
 concurrency: staging_environment
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    paths:
+      - "**/two-job.yml"
 
 jobs:
   build:
