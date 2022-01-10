@@ -1,7 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
 name: winappdriver
+env:
+  name: staging_environment
 
+concurrency: staging_environment
 on:
   push:
     branches: [ main ]

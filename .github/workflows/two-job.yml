@@ -1,0 +1,102 @@
+name: two-job-concurrent
+env:
+  name: staging_environment
+
+concurrency: staging_environment
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [win10-self-hosted]
+        os: [windows-latest]
+        node-version: [14]
+    steps:
+      - name: Get short SHA 🔑
+        id: slug
+        run: |
+          echo "::set-output name=sha7::${GITHUB_SHA::7}"
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️   
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@zeeis"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+
+      - name: Get last commit date
+        id: vars
+        run: |
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
+        run: |
+          echo "${{ steps.vars.outputs.date }}"
+
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install
+
+      - name: sleep 60s
+        run: | 
+          Start-Sleep -s 60
+        shell: powershell
+  
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [win10-self-hosted]
+        os: [windows-latest]
+        node-version: [14]
+    steps:
+      - name: Get short SHA 🔑
+        id: slug
+        run: |
+          echo "::set-output name=sha7::${GITHUB_SHA::7}"
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️   
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@zeeis"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+
+      - name: Get last commit date
+        id: vars
+        run: |
+          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+        shell: bash
+
+      - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
+        run: |
+          echo "${{ steps.vars.outputs.date }}"
+
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install
+
+      - name: sleep 60s
+        run: | 
+          Start-Sleep -s 60
+        shell: powershell
