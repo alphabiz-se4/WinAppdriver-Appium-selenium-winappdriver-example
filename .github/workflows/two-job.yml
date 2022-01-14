@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         # os: [win10-self-hosted]
-        os: [windows-latest, windows-latest]
+        os: [windows-2022, windows-2022]
         node-version: [14]
     steps:
       - name: Get short SHA 🔑
@@ -49,10 +49,22 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
 
-      - name: sleep 60s
+      - name: Install winappdriver.msi
         run: | 
-          Start-Sleep -s 60
+          Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
+          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
+          Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
+          Start-Sleep -s 5
         shell: powershell
+
+      - name: Install Alphabiz.7z
+        run: |
+          Invoke-WebRequest "https://github.com/alphabiz-se4/WinAppdriver-Appium-selenium-winappdriver-example/releases/download/alphabiz-v1.0/alphabiz.7z" -OutFIle "C:\alphabiz.7z"
+          cd C:/
+          7z x alphabiz.7z
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+          GITHUB_PAT: ${{ secrets.PAT }}
   
   test:
     needs: build
@@ -60,42 +72,26 @@ jobs:
     strategy:
       matrix:
         # os: [win10-self-hosted]
-        os: [windows-latest]
+        os: [windows-2022,windows-2022]
         node-version: [14]
     steps:
-      - name: Get short SHA 🔑
-        id: slug
+      - name: Run appium
         run: |
-          echo "::set-output name=sha7::${GITHUB_SHA::7}"
-          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
-        shell: bash
-
-      - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️   
-        uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+          Start-Process PowerShell -ArgumentList "yarn appium --log ./test/output/release/appium.log"
+          Start-Sleep -s 10
+          
+      - name: Run test release
+        # run: yarn run jest
+        uses: nick-invision/retry@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@zeeis"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
-
-      - name: Get last commit date
-        id: vars
-        run: |
-          echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
-        shell: bash
-
-      - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
-        run: |
-          echo "${{ steps.vars.outputs.date }}"
-
-      - name: Install dependencies 👨🏻‍💻
-        run: yarn install
-
-      - name: sleep 60s
-        run: | 
-          Start-Sleep -s 60
-        shell: powershell
+          timeout_minutes: 10
+          max_attempts: 2
+          retry_on: error
+          command: yarn run jest
+      
+      - name: Upload Test Results 🗃
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: "output"
+          path: output/**
