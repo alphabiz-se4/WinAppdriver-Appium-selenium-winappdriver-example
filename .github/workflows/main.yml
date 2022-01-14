@@ -7,10 +7,8 @@ env:
 concurrency: staging_environment
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    paths:
+      - "!**/main.yml"
 #
 jobs:
   build:
