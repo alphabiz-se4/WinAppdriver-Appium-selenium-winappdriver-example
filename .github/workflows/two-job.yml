@@ -1,6 +1,6 @@
 name: two-job-concurrent
 env:
-  CONCURRENCY_GROUP: ${{ 'group-1' }}
+  CONCURRENCY_GROUP: 'group-1'
 
 concurrency: ${{ env.CONCURRENCY_GROUP }}
 on:
