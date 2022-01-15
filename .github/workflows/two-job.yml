@@ -1,8 +1,8 @@
 name: two-job-concurrent
 env:
-  name: staging_environment
+  CONCURRENCY_GROUP: ${{ 'group-1' }}
 
-concurrency: staging_environment
+concurrency: ${{ env.CONCURRENCY_GROUP }}
 on:
   push:
     paths:
