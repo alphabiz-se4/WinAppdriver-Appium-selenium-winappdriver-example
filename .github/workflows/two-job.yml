@@ -2,7 +2,7 @@ name: two-job-concurrent
 env:
   CONCURRENCY_GROUP: 'group-1'
 
-concurrency: ${{ env.CONCURRENCY_GROUP }}
+concurrency: ${{ CONCURRENCY_GROUP }}
 on:
   push:
     paths:
