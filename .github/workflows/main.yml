@@ -2,9 +2,13 @@
 
 name: winappdriver
 env:
-  CONCURRENCY_GROUP: 'group-1'
+  name: staging_environment
 
-concurrency: ${{ CONCURRENCY_GROUP }}
+concurrency: staging_environment
+# env:
+#   CONCURRENCY_GROUP: 'group-1'
+
+# concurrency: ${{ CONCURRENCY_GROUP }}
 on:
   push:
     paths:
