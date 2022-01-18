@@ -19,9 +19,6 @@ on:
 jobs:
   build:
     environment: EMAIL_USERNAME
-      env:
-        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
