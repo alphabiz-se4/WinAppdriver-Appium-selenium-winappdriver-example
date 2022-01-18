@@ -18,7 +18,8 @@ on:
 
 jobs:
   build:
-    environment: EMAIL_USERNAME
+    environment: 
+      name: PAT
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
