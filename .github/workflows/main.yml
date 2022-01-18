@@ -55,15 +55,19 @@ jobs:
           echo ::set-output name=LAST_TAG::$(git describe --abbrev=0 --tags)
         shell: bash
 
+      - name: Get last Release
+        id: keydb
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: tanshuai
+          repo: alphabiz
+          excludes: prerelease, draft
+
       - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
         run: |
           echo "${{ steps.vars.outputs.date }}"
           echo "${{ steps.vars.outputs.LAST_TAG }}"
-      
-      - name: Test
-        run: |
-          echo "$(git describe --tags --abbrev=0)"
-          echo "event.tag:${{ github.event.release.tag_name }}"
+          echo "${{ steps.keydb.outputs.release }}"
 
       # - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1
       #   with:
