@@ -1,9 +1,8 @@
 # This is a basic workflow to help you get started with Actions
 
 name: winappdriver
-environment: 
-  EMAIL_USERNAME
-  PAT
+environment: EMAIL_USERNAME
+
 env:
   name: staging_environment
   NODE_AUTH_TOKEN: ${{ secrets.PAT }}
