@@ -43,23 +43,25 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT }}
 
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn install
+
       - name: Get last commit date
         id: vars
         run: |
           echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
+          echo ::set-output name=LAST_TAG::$(git describe --abbrev=0 --tags)
         shell: bash
-
-      - name: Test
-        run: |
-          git describe --tags --abbrev=0
-          echo "$(git describe --tags --abbrev=0)"
 
       - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
         run: |
           echo "${{ steps.vars.outputs.date }}"
-
-      - name: Install dependencies 👨🏻‍💻
-        run: yarn install
+          echo "${{ steps.vars.outputs.LAST_TAG }}"
+      
+      - name: Test
+        run: |
+          echo "$(git describe --tags --abbrev=0)"
+          echo "event.tag:${{ github.event.release.tag_name }}"
 
       # - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1
       #   with:
