@@ -95,8 +95,7 @@ jobs:
 
       - name: Install Alphabiz.7z
         run: |
-          Invoke-WebRequest "https://github.com/alphabiz-se4/WinAppdriver-Appium-selenium-winappdriver-example/releases/download/alphabiz-v1.0/alphabiz.7z" -OutFIle "C:\alphabiz.7z"
-          cd C:/
+          curl -L https://github.com/tanshuai/alphabiz/releases/download/nightly-20220117-b5d39f6/alphabiz-windows-nightly-20220117-b5d39f6.7z > alphabiz.7z
           7z x alphabiz.7z
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT }}
