@@ -51,7 +51,8 @@ jobs:
 
       - name: Test
         run: |
-          run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`"
+          git describe --tags --abbrev=0
+          echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`"
 
       - name: Checkout vars-date ${{ steps.vars.outputs.date }} ⬇️
         run: |
