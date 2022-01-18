@@ -46,8 +46,8 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@zeeis"
         env:
-          PASSWORD: ${{ env.PASSWORD }}
-          NODE_AUTH_TOKEN: ${{ env.PAT }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
