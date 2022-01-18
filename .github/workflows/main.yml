@@ -18,6 +18,9 @@ on:
 
 jobs:
   build:
+    environment: EMAIL_USERNAME
+      env:
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -52,9 +55,6 @@ jobs:
 
       - name: Get last commit date
         id: vars
-        environment: EMAIL_USERNAME
-        env:
-          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
         run: |
           echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
           echo ::set-output name=LAST_TAG::$(git describe --abbrev=0 --tags)
