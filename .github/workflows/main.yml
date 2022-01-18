@@ -33,6 +33,8 @@ jobs:
 
       - name: Checkout ${{ steps.slug.outputs.sha7 }} ⬇️   
         uses: actions/checkout@v2
+      
+      - run: git fetch --prune --unshallow
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -49,7 +51,6 @@ jobs:
       - name: Get last commit date
         id: vars
         run: |
-          git fetch -t
           echo "::set-output name=date::$(git log -1 --date=format:'%Y%m%d' --format='%cd')"
           echo ::set-output name=LAST_TAG::$(git describe --abbrev=0 --tags)
         shell: bash
