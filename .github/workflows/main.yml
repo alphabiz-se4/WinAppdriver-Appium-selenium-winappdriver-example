@@ -1,8 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
 name: winappdriver
+environment: 
+  EMAIL_USERNAME
+  PAT
 env:
   name: staging_environment
+  NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+  GITHUB_PAT: ${{ secrets.PAT }}
+  EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+  EMAIL1_USERNAME: ${{ env.EMAIL_USERNAME }}
 
 concurrency: staging_environment
 # env:
