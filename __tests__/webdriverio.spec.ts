@@ -5,7 +5,7 @@ const path = require('path')
 const wdio = require('webdriverio')
 const fs = require('fs')
 
-const GifCamID = path.resolve(__dirname, './Alphabiz.exe')
+const GifCamID = path.resolve(__dirname, './alphabiz/electron/Alphabiz-win32-x64/Alphabiz.exe')
 // 'C:/electron/Alphabiz-win32-x64/Alphabiz.exe'
 // 'C:/Program Files (x86)/AccessibilityInsights/1.1/AccessibilityInsights.exe'
 // 'C:/Users/alphabiz/Downloads/crystaldiskinfo8_12_7/DiskInfo64.exe'

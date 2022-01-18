@@ -95,8 +95,9 @@ jobs:
 
       - name: Install Alphabiz.7z
         run: |
-          curl -L https://github.com/tanshuai/alphabiz/releases/download/nightly-20220117-b5d39f6/Alphabiz.exe > Alphabiz.exe
-      # 7z x alphabiz.7z
+          curl -L https://github.com/tanshuai/alphabiz/releases/download/nightly-20220117-b5d39f6/alphabiz-windows-nightly-20220117-b5d39f6.7z > alphabiz.7z
+          7z x alphabiz.7z
+        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT }}
           GITHUB_PAT: ${{ secrets.PAT }}
