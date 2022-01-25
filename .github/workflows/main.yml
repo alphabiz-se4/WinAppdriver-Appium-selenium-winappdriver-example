@@ -49,15 +49,10 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@zeeis"
 
-      - name: Choco help
-        run: choco -h
-
-      - name: check wixtoolset
+      - name: Add wixtoolset environment variables
         run: |
-          cd C:
-          dir
-          cd C:\Program\ Files\ \(x86\)
-          dir
+          export PATH=$PATH:/c/Program\ Files\ \(x86\)/WiX\ Toolset\ v3.11/bin
+          echo $PATH
         shell: bash
 
       - name: Install dependencies 👨🏻‍💻
