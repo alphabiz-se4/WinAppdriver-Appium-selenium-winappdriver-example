@@ -52,6 +52,7 @@ jobs:
         run: |
           cd C:/Program\ Files\ \(x86\)/WiX\ Toolset\ v3.11/bin
           dir
+        shell: bash
 
       - name: Add wixtoolset environment variables
         run: |
