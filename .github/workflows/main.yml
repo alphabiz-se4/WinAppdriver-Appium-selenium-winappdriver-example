@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         # os: [win10-self-hosted]
-        os: [windows-2022]
+        os: [windows-latest]
         node-version: [14]
     steps:
       - name: Get short SHA 🔑
