@@ -52,6 +52,13 @@ jobs:
       - name: Choco help
         run: choco -h
 
+      - name: check wixtoolset
+        run: |
+          cd C:\
+          dir
+          cd C:\Program\ Files\ \(x86\)
+          dir
+
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
 
