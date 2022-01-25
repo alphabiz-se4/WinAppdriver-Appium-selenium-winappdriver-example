@@ -54,7 +54,7 @@ jobs:
 
       - name: check wixtoolset
         run: |
-          cd C:\
+          cd C:
           dir
           cd C:\Program\ Files\ \(x86\)
           dir
