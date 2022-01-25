@@ -58,6 +58,7 @@ jobs:
           dir
           cd C:\Program\ Files\ \(x86\)
           dir
+        shell: bash
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
