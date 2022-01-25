@@ -50,19 +50,7 @@ jobs:
           scope: "@zeeis"
 
       - name: Choco help
-        uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: -h
-      
-      - name: Choco help
-        uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: install  wixtoolset --no-progress
-      
-      - name: check wix
-        run: |
-          cd C:\Program Files (x86)
-          dir
+        run: choco -h
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
