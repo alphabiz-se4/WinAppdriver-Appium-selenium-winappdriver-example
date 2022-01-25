@@ -20,6 +20,9 @@ jobs:
   build:
     environment: 
       name: PAT
+    env:
+      PASSWORD: ${{ secrets.PASSWORD }}
+      NODE_AUTH_TOKEN: ${{ secrets.PAT }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -45,9 +48,21 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: "https://npm.pkg.github.com"
           scope: "@zeeis"
-        env:
-          PASSWORD: ${{ secrets.PASSWORD }}
-          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: -h
+      
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install  wixtoolset --no-progress
+      
+      - name: check wix
+        run: |
+          cd C:\Program Files (x86)
+          dir
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn install
@@ -87,13 +102,13 @@ jobs:
       #     Add-AppPackage -Path .\Microsoft.WindowsCalculator_2020.2103.8.0_neutral___8wekyb3d8bbwe.AppxBundle
       #   shell: powershell
 
-      - name: Install winappdriver.msi
-        run: | 
-          Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
-          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
-          Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
-          Start-Sleep -s 5
-        shell: powershell
+      # - name: Install winappdriver.msi
+      #   run: | 
+      #     Invoke-WebRequest "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi" -OutFIle "C:\WindowsApplicationDriver_1.2.1.msi"
+      #     Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
+      #     Start-Process msiexec -ArgumentList "/quiet","/i","C:\WindowsApplicationDriver_1.2.1.msi" -Verb runAs -Wait
+      #     Start-Sleep -s 5
+      #   shell: powershell
 
       # - name: Install AccessibilityInsights/msi
       #   run: |
@@ -101,14 +116,14 @@ jobs:
       #     Start-Process msiexec -ArgumentList "/quiet","/i","C:\AccessibilityInsights.msi" -Verb runAs -Wait
       #     Start-Sleep -s 5
 
-      - name: Install Alphabiz.7z
-        run: |
-          curl -L https://github.com/tanshuai/alphabiz/releases/download/nightly-20220117-b5d39f6/alphabiz-windows-nightly-20220117-b5d39f6.7z > alphabiz.7z
-          7z x alphabiz.7z
-        shell: bash
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
-          GITHUB_PAT: ${{ secrets.PAT }}
+      # - name: Install Alphabiz.7z
+      #   run: |
+      #     curl -L https://github.com/tanshuai/alphabiz/releases/download/nightly-20220117-b5d39f6/alphabiz-windows-nightly-20220117-b5d39f6.7z > alphabiz.7z
+      #     7z x alphabiz.7z
+      #   shell: bash
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.PAT }}
+      #     GITHUB_PAT: ${{ secrets.PAT }}
       # msiexec /i  "C:\WindowsApplicationDriver_1.2.1.msi" /q
 
       # - name: manu Run winappdriver
@@ -118,23 +133,23 @@ jobs:
       #     Start-Sleep -s 5
       #   shell: powershell
 
-      - name: Run appium
-        run: |
-          Start-Process PowerShell -ArgumentList "yarn appium --log ./test/output/release/appium.log"
-          Start-Sleep -s 10
+      # - name: Run appium
+      #   run: |
+      #     Start-Process PowerShell -ArgumentList "yarn appium --log ./test/output/release/appium.log"
+      #     Start-Sleep -s 10
           
-      - name: Run test release
-        # run: yarn run jest
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          max_attempts: 2
-          retry_on: error
-          command: yarn run jest
+      # - name: Run test release
+      #   # run: yarn run jest
+      #   uses: nick-invision/retry@v2
+      #   with:
+      #     timeout_minutes: 10
+      #     max_attempts: 2
+      #     retry_on: error
+      #     command: yarn run jest
       
-      - name: Upload Test Results 🗃
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: "output"
-          path: output/**
+      # - name: Upload Test Results 🗃
+      #   if: always()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: "output"
+      #     path: output/**
