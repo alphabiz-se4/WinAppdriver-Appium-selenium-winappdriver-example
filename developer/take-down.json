@@ -1,0 +1,24 @@
+{
+  "users": [{
+    "_comment": "You should use pubkey as id here. See take-down.js for more info.",
+    "id": "a_pubkey_of_user",
+    "reason": "Serious Violation"
+  }],
+  "channels": [{
+    "id": "58s2m347r3jmuhp5c2u7",
+    "reason": "Copyright Disputes"
+  },{
+    "id": "394i9vx3k8lovb10lg4h",
+    "reason": "Copyright Disputes"
+  },{
+    "id": "hlrg0w68yt4covwpboqj",
+    "reason": "Copyright Disputes"
+  },{
+    "id": "jbh4diqqjatyw5upbe0s",
+    "reason": "Copyright Disputes"
+  }],
+  "posts": [{
+    "id": "an_id_of_post",
+    "reason": "Adults Only"
+  }]
+}
